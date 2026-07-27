@@ -1,34 +1,48 @@
-import { useContext, createContext, useState } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  type ReactNode,
+  useMemo,
+} from "react";
+import { type AuthContextType } from "../types/AuthContext";
+import storage from "../utils/storage";
 
-import { type AuthContext } from "../types/AuthContext";
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// const AuthContext = createContext<AuthContext>({
-//   isLogged: false,
-//   setIsLogged: () => {},
-// });
+const TOKEN_KEY = "qubica_jwt_token";
 
-// export default function AuthContextProvider({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   const [isLogged, setIsLogged] = useState(false);
+export default function AuthContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const [token, setTokenState] = useState<string | null>(() => {
+    return storage.get(TOKEN_KEY);
+  });
 
-//   return (
-//     <AuthContext.Provider value={{ isLogged, setIsLogged }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
+  const login = (newToken: string) => {
+    storage.persist(TOKEN_KEY, newToken);
+    setTokenState(newToken);
+  };
 
-// export const useAuth = () => useContext(AuthContext);
+  const logout = () => {
+    storage.delete(TOKEN_KEY);
+    setTokenState(null);
+  };
 
+  const contextValue = useMemo(
+    () => ({
+      isLogged: !!token,
+      token,
+      login,
+      logout,
+    }),
+    [token],
+  );
 
-const AuthContext = createContext();
-
-export default function AuthContextProvider({ children, session }) {
   return (
-    <AuthContext.Provider value={session}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
 
@@ -36,7 +50,9 @@ export const useAuthContext = () => {
   const context = useContext(AuthContext);
 
   if (context === undefined) {
-    throw new Error("useAuthContext must be used within a AuthContextProvider");
+    throw new Error(
+      "useAuthContext must be used within an AuthContextProvider",
+    );
   }
 
   return context;
