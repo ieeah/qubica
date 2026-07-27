@@ -1,0 +1,31 @@
+@layer reset, base, components, utilities;
+
+@layer reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --bg-canvas: #f4f4f4;
+    --text-main: #111111;
+    --border-thick: 3px solid var(--text-main);
+    --brutal-shadow: 4px 4px 0 var(--text-main);
+    --brutal-shadow-hover: 2px 2px 0 var(--text-main);
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --color-brand: #ffdf00; /* Giallo brutalista */
+    --color-error: #ff3333;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+  }
+}
