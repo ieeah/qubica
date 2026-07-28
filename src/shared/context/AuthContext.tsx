@@ -1,14 +1,15 @@
 import {
-  useContext,
-  createContext,
   useState,
   type ReactNode,
   useMemo,
 } from "react";
-import { type AuthContextType } from "@/shared/types/AuthContext";
+import { type AuthContextType } from "@/shared/types/AuthContext.type";
 import storage from "@/shared/utils/storage";
+import createAppContext from "@/shared/utils/createAppContext";
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const [AuthContext, useAuthContext] = createAppContext<AuthContextType>("AuthContext");
+
+export { useAuthContext };
 
 const TOKEN_KEY = "qubica_jwt_token";
 
@@ -45,15 +46,3 @@ export default function AuthContextProvider({
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
-
-export const useAuthContext = () => {
-  const context = useContext(AuthContext);
-
-  if (context === undefined) {
-    throw new Error(
-      "useAuthContext must be used within an AuthContextProvider",
-    );
-  }
-
-  return context;
-};
