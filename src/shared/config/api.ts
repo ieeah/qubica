@@ -1,10 +1,14 @@
 export const API_BASE_URL = 'https://fakestoreapi.com';
 
+const PRODUCTS = "/products";
+const CART = "/carts";
+
 export const API_ENDPOINTS = {
-  PRODUCTS: '/products',
+  PRODUCTS,
   PRODUCT_DETAIL: (id: number) => `/products/${id}`,
-  CATEGORIES: '/products/categories',
-  CART: '/carts',
+  CATEGORIES: `${PRODUCTS}/categories`,
+  CART,
+  CART_DETAIL: (id: number) => `${CART}/${id}`,
   USERS: '/users',
   LOGIN: '/auth/login',
 } as const;

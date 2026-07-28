@@ -1,12 +1,17 @@
 import { useMemo } from 'react';
-import { API_BASE_URL, API_ENDPOINTS } from '../config/api';
-import useRequest from './useRequest';
 
+
+import useRequest from '@/shared/hooks/useRequest';
+import { useAuthContext } from '@/shared/context/AuthContext';
+import { API_BASE_URL, API_ENDPOINTS } from '@/shared/config/api';
+
+import type { Cart } from '@/shared/types/fakestore/cart';
 
 export default function useFakeStore() {
 
   // Placeholder per il token JWT (in futuro verrà letto da AuthContext)
-  const dummyToken = 'dummy_jwt_token_xyz';
+
+  const { token } = useAuthContext();
 
   const { request, isLoading } = useRequest(API_BASE_URL);
 
@@ -39,14 +44,37 @@ export default function useFakeStore() {
 
     const cart = {
       get: (options?: RequestInit) =>
-        request(API_ENDPOINTS.CART, { ...options, method: 'GET' }),
-      add: (payload: unknown, options?: RequestInit) =>
+        request(API_ENDPOINTS.CART, {
+          ...options,
+          method: 'GET',
+          headers: {
+            ...options?.headers,
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          }
+        }),
+      add: (payload: Cart, options?: RequestInit) =>
         request(API_ENDPOINTS.CART, {
           ...options,
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...options?.headers },
+          headers: {
+            ...options?.headers,
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          },
           body: JSON.stringify(payload),
         }),
+      update: (payload: Cart, options?: RequestInit) =>
+        request(API_ENDPOINTS.CART_DETAIL(payload.id), {
+          ...options,
+          method: "PUT",
+          headers: {
+            ...options?.headers,
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify(payload),
+        })
     }
 
     return {
@@ -55,7 +83,7 @@ export default function useFakeStore() {
       auth,
       cart
     };
-  }, [request]);
+  }, [request, token]);
 
   return { store, isLoading }
 }
