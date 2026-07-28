@@ -1,4 +1,4 @@
-import dummyLogger from "./dummyLogger";
+import dummyLogger from "@/shared/utils/dummyLogger";
 
 export interface AppStorage {
   get<T = unknown>(key: string): T | null;

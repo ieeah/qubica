@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
-import requestTuple from "../utils/requestTuple";
-import dummyLogger from "../utils/dummyLogger";
+import requestTuple from "@/shared/utils/requestTuple";
+import dummyLogger from "@/shared/utils/dummyLogger";
 
 export default function useRequest(baseUrl: string) {
   const [BASE_URL] = useState<string>(baseUrl);

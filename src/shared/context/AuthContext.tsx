@@ -5,8 +5,8 @@ import {
   type ReactNode,
   useMemo,
 } from "react";
-import { type AuthContextType } from "../types/AuthContext";
-import storage from "../utils/storage";
+import { type AuthContextType } from "@/shared/types/AuthContext";
+import storage from "@/shared/utils/storage";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
