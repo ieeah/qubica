@@ -11,7 +11,7 @@ const [AuthContext, useAuthContext] = createAppContext<AuthContextType>("AuthCon
 
 export { useAuthContext };
 
-const TOKEN_KEY = "qubica_jwt_token";
+const TOKEN_KEY = "QST-JWT-TOKEN";
 
 export default function AuthContextProvider({
   children,

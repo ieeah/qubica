@@ -10,14 +10,14 @@ import { createContext, useContext } from "react";
  * @example
  * const [AuthContext, useAuthContext] = createAppContext<AuthContextType>("AuthContext");
  */
-export default function createAppContext<T>(name?: string, defaultValue?: T | unknown) {
-  const Context = createContext<T | unknown>(defaultValue);
+export default function createAppContext<T>(name?: string, defaultValue?: T) {
+  const Context = createContext<T | undefined>(defaultValue);
 
   if (name) {
     Context.displayName = name;
   }
 
-  const useAppScope = () => {
+  const useAppScope = (): T => {
     const context = useContext(Context);
 
     if (context === undefined) {
