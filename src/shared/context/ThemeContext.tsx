@@ -1,4 +1,4 @@
-import { useState, useMemo, type ReactNode } from "react";
+import { useState, useMemo, useEffect, type ReactNode } from "react";
 
 import type { ThemeContextType, Theme } from "../types/ThemeContext.type";
 import createAppContext from "../utils/createAppContext";
@@ -50,6 +50,14 @@ export default function ThemeContextProvider({
     }),
     [current, preferred],
   );
+
+  useEffect(() => {
+    if (current === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [current]);
 
   return (
     <ThemeContext.Provider value={contextValue}>
