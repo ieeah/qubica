@@ -1,43 +1,48 @@
-import { useContext, createContext, useState } from "react";
+import {
+  useState,
+  type ReactNode,
+  useMemo,
+} from "react";
+import { type AuthContextType } from "@/shared/types/AuthContext.type";
+import storage from "@/shared/utils/storage";
+import createAppContext from "@/shared/utils/createAppContext";
 
-import { type AuthContext } from "../types/AuthContext";
+const [AuthContext, useAuthContext] = createAppContext<AuthContextType>("AuthContext");
 
-// const AuthContext = createContext<AuthContext>({
-//   isLogged: false,
-//   setIsLogged: () => {},
-// });
+export { useAuthContext };
 
-// export default function AuthContextProvider({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   const [isLogged, setIsLogged] = useState(false);
+const TOKEN_KEY = "QST-JWT-TOKEN";
 
-//   return (
-//     <AuthContext.Provider value={{ isLogged, setIsLogged }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// }
+export default function AuthContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const [token, setTokenState] = useState<string | null>(() => {
+    return storage.get(TOKEN_KEY);
+  });
 
-// export const useAuth = () => useContext(AuthContext);
+  const login = (newToken: string) => {
+    storage.persist(TOKEN_KEY, newToken);
+    setTokenState(newToken);
+  };
 
+  const logout = () => {
+    storage.delete(TOKEN_KEY);
+    setTokenState(null);
+  };
 
-const AuthContext = createContext();
+  const contextValue = useMemo(
+    () => ({
+      isLogged: !!token,
+      token,
+      login,
+      logout,
+    }),
+    [token],
+  );
 
-export default function AuthContextProvider({ children, session }) {
   return (
-    <AuthContext.Provider value={session}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
-
-export const useAuthContext = () => {
-  const context = useContext(AuthContext);
-
-  if (context === undefined) {
-    throw new Error("useAuthContext must be used within a AuthContextProvider");
-  }
-
-  return context;
-};

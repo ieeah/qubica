@@ -6,12 +6,5 @@ export type CartItem = {
 export type Cart = {
   id: number;
   userId: number;
-  date: string;
-  products: CartItem[];
-}
-
-export type AddCartPayload = {
-  userId: number;
-  date: string;
   products: CartItem[];
 }
