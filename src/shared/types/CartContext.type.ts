@@ -2,13 +2,13 @@ import type { Product } from './fakestore';
 
 export type LocalCartItem = Product & { quantity: number };
 
-export interface CartState {
+export type CartState = {
   items: LocalCartItem[];
   totalItems: number;
   totalPrice: number;
 }
 
-export interface CartContextType {
+export type CartContextType = {
   state: CartState;
   addItem: (product: Product) => void;
   removeItem: (productId: number) => void;
