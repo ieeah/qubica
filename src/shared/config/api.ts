@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
   PRODUCTS,
   PRODUCT_DETAIL: (id: number) => `/products/${id}`,
   CATEGORIES: `${PRODUCTS}/categories`,
+  CATEGORY_PRODUCTS: (category: string) => `${PRODUCTS}/category/${category}`,
   CART,
   CART_DETAIL: (id: number) => `${CART}/${id}`,
   USERS: '/users',

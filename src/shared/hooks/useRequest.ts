@@ -1,30 +1,45 @@
-import { useState, useCallback } from "react";
-import requestTuple from "@/shared/utils/requestTuple";
-import dummyLogger from "@/shared/utils/dummyLogger";
+import { useState, useCallback, useEffect, useRef } from "react";
 
-export default function useRequest(baseUrl: string) {
-  const [BASE_URL] = useState<string>(baseUrl);
+/**
+ * Hook per gestire il ciclo di vita di una funzione che restituisce una Promise (es. chiamate API).
+ * 
+ * @param requestFn La funzione (factory) che esegue la richiesta.
+ * @param deps Array di dipendenze opzionale. Se fornito, la richiesta viene eseguita automaticamente come "Query" al mount o al cambio delle dipendenze. Se omesso, funge da "Mutation" e va eseguita manualmente tramite la funzione `execute`.
+ */
+export default function useRequest<T, Args extends any[] = any[]>(
+  requestFn: (...args: Args) => Promise<[Error | null, T | null]>,
+  deps?: React.DependencyList
+) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
-  const request = useCallback(async (url: string, options?: RequestInit) => {
+  // Manteniamo la reference più aggiornata alla requestFn per non dover 
+  // ricreare execute o rilanciare useEffect se la funzione non è memoizzata.
+  const requestFnRef = useRef(requestFn);
+  useEffect(() => {
+    requestFnRef.current = requestFn;
+  });
+
+  const execute = useCallback(async (...args: Args) => {
     setIsLoading(true);
-
-    const fullUrl = url.startsWith("http") ? url : `${BASE_URL}${url}`;
-    dummyLogger.info(`fetched '${fullUrl}', with options: ${JSON.stringify(options ?? {})}`);
-    const response = await requestTuple(fetch(fullUrl, options));
-
-    const [error, data] = response;
-
-    if (error != null) {
-      dummyLogger.error(`'${fullUrl}' fetch failed with error: ${JSON.stringify(error)}`);
-    } else {
-      dummyLogger.info(`'${fullUrl}' fetch succeded with data: ${JSON.stringify(data)}`);
-    }
-
+    const [err, res] = await requestFnRef.current(...args);
+    setError(err);
+    setData(res);
     setIsLoading(false);
+    return [err, res] as const;
+  }, []);
 
-    return response;
-  }, [BASE_URL]);
+  const isQuery = Array.isArray(deps);
 
-  return { request, isLoading }
-}
+  useEffect(() => {
+    if (isQuery) {
+      (async () => {
+        await execute(...([] as unknown as Args));
+      })();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, isQuery ? deps : []);
+
+  return [error, data, isLoading, execute] as const;
+}
