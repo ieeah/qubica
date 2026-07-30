@@ -1,0 +1,19 @@
+.dialog {
+  margin: auto;
+  border: none;
+  border-radius: 8px;
+  padding: var(--spacing-lg);
+  width: 90%;
+  max-width: 420px;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  margin: 0 0 var(--spacing-md);
+}
