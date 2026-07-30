@@ -47,24 +47,21 @@
   transform: scale(1.05);
 }
 
-.priceBadge {
+.ratingBadge {
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-sm);
-  background-color: var(--color-dark-blue);
-  color: var(--color-cream);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--bg-cta);
+  color: var(--text-cta);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 700;
-  font-family: "Courier New", Courier, monospace;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   z-index: 2;
-}
-
-:global(.dark) .priceBadge {
-  background-color: var(--bg-cta);
-  color: var(--text-cta);
 }
 
 .content {

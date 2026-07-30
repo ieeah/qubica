@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Star } from "lucide-react";
 import styles from "./productcard.module.css";
 import type { Product } from "@/shared/types/fakestore/product";
 
@@ -28,7 +29,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             className={styles.image}
             loading="lazy"
           />
-          <span className={styles.priceBadge}>{formattedPrice}</span>
+          {product.rating && (
+            <span className={styles.ratingBadge}>
+              <Star size={14} fill="currentColor" />
+              {product.rating.rate.toFixed(1)}
+            </span>
+          )}
         </div>
         <div className={styles.content}>
           <h3 className={styles.title}>{product.title}</h3>
