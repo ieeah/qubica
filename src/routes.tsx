@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "@/features/home/Home";
+import ProductDetailPage from "@/features/detail/ProductDetailPage";
 import WishlistPage from "@/features/wishlist/WishlistPage";
 import ProtectedRoute from "@/shared/components/routeComponents/ProtectedRoute";
 import Layout from "@/shared/components/layout/Layout";
@@ -15,7 +16,7 @@ export function AppRoutes() {
       {/* Pagine con Layout (Header & Footer) */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<div>Dettaglio Prodotto</div>} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/page/:id" element={<GenericPage />} />
 
         {/* Carrello accessibile anche da ospiti: il login viene chiesto solo al tentativo di acquisto */}

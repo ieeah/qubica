@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -6,11 +7,17 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+}
+
+.wishlistButton {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 3;
 }
 
 .card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,7 +26,7 @@
   color: inherit;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
 }
 
 .imageWrapper {
@@ -64,13 +71,8 @@
   z-index: 2;
 }
 
-.content {
-  padding: var(--spacing-md);
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-  gap: var(--spacing-sm);
+.titleSection {
+  padding: var(--spacing-md) var(--spacing-md) 0;
   border-top: 1px solid var(--border-color);
 }
 
@@ -86,10 +88,46 @@
   overflow: hidden;
 }
 
+/* Prezzo e bottone carrello vivono fuori dal Link (un <button> non può
+   stare dentro un <a>) come riga flex a sé, sempre in fondo alla card. */
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+}
+
 .price {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-title);
   margin: 0;
   font-family: "Courier New", Courier, monospace;
+}
+
+.cartButton {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-cta);
+  color: var(--text-cta);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.cartButton:hover {
+  opacity: 0.8;
+}
+
+/* Prodotto già nel carrello: colori invertiti rispetto allo stato "da aggiungere" */
+.cartButton.inCart {
+  background-color: var(--text-main);
+  color: var(--bg-canvas);
+  border-color: var(--text-main);
 }
