@@ -32,6 +32,7 @@ export default function Header() {
               className={cn(styles.hamburgerBtn, "d-block d-lg-none")}
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Apri menu"
+              aria-expanded={isMobileMenuOpen}
             >
               <Menu size={24} />
             </button>
