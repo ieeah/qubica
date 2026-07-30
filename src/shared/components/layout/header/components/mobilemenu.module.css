@@ -7,13 +7,19 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  display: none;
+  transition: opacity 0.3s ease, display 0.3s allow-discrete;
 }
 
 .backdrop.open {
+  display: block;
   opacity: 1;
-  pointer-events: auto;
+}
+
+@starting-style {
+  .backdrop.open {
+    opacity: 0;
+  }
 }
 
 .panel {
@@ -26,14 +32,21 @@
   background-color: var(--bg-canvas);
   z-index: 1001;
   transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  display: none;
+  transition: transform 0.3s ease, display 0.3s allow-discrete;
   box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-  display: flex;
   flex-direction: column;
 }
 
 .panel.open {
+  display: flex;
   transform: translateX(0);
+}
+
+@starting-style {
+  .panel.open {
+    transform: translateX(-100%);
+  }
 }
 
 .header {
@@ -85,6 +98,12 @@
   font-size: 1.1rem;
   font-weight: 500;
   transition: color 0.2s ease;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 0;
 }
 
 .searchLink:hover {

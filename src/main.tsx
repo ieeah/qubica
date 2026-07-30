@@ -8,14 +8,17 @@ import "@/shared/styles/global.css";
 import App from "@/App";
 import AuthContextProvider from "@/shared/context/AuthContext";
 import ThemeContextProvider from "@/shared/context/ThemeContext";
+import WishlistContextProvider from "@/shared/context/WishlistContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeContextProvider>
       <AuthContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <WishlistContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </WishlistContextProvider>
       </AuthContextProvider>
     </ThemeContextProvider>
   </StrictMode>,

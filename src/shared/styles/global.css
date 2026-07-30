@@ -70,6 +70,28 @@
     margin: 0 auto;
     padding: 0 var(--spacing-md);
   }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+::view-transition-group(root) {
+  animation-duration: 0s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: ease;
 }
 
 @layer components {

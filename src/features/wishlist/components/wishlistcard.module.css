@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.removeButton {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-white);
+  color: #c0392b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.2s;
+}
+
+.removeButton:hover {
+  opacity: 0.8;
+}

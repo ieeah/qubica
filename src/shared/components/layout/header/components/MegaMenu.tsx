@@ -37,7 +37,10 @@ export default function MegaMenu() {
   } else if (error) {
     dropdownContent = (
       <div className="col-12">
-        <Alert type="error" message="Errore durante il caricamento delle categorie." />
+        <Alert
+          type="error"
+          message="Errore durante il caricamento delle categorie."
+        />
       </div>
     );
   } else {
@@ -66,7 +69,7 @@ export default function MegaMenu() {
         onClose={() => setIsOpen(false)}
         triggerRef={triggerRef}
       >
-        <div className="row g-3">{dropdownContent}</div>
+        <div className="d-flex g-3">{dropdownContent}</div>
       </Dropdown>
     </div>
   );

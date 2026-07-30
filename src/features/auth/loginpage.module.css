@@ -1,0 +1,83 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 4rem var(--spacing-md);
+}
+
+.form {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--spacing-xl);
+}
+
+.title {
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.field input {
+  padding: 0.65rem var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+
+.field input:focus-visible {
+  outline: 2px solid var(--bg-cta);
+  outline-offset: 1px;
+}
+
+.field input[aria-invalid="true"] {
+  border-color: #c0392b;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 0.85rem;
+}
+
+.apiError {
+  color: #c0392b;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.hint {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.hintButton {
+  margin-top: 0.35rem;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: var(--text-title);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.hintButton:hover {
+  opacity: 0.8;
+}

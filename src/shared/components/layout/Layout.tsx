@@ -5,7 +5,7 @@ import cn from "@/shared/utils/cn";
 import styles from "./layout.module.css";
 
 export default function Layout() {
-  const layoutClassnames = cn(styles.classNames, "col-12");
+  const layoutClassnames = cn(styles.layout, "col-12");
 
   return (
     <div className={layoutClassnames}>

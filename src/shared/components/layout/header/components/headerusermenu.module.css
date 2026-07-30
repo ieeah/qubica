@@ -1,6 +1,31 @@
 .userMenu {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
   font-weight: 500;
+}
+
+.avatarButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background-color: var(--text-main);
+  color: var(--bg-canvas);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.avatarButton:hover {
+  opacity: 0.8;
+}
+
+div.profileMenu {
+  width: 220px;
+  right: 0;
 }
