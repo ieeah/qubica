@@ -47,10 +47,11 @@ export default function LoginPage() {
             type="text"
             autoComplete="username"
             aria-invalid={!!errors.username}
+            aria-describedby={errors.username ? "username-error" : undefined}
             {...register("username")}
           />
           {errors.username && (
-            <span className={styles.error} role="alert">
+            <span id="username-error" className={styles.error} role="alert">
               {errors.username.message}
             </span>
           )}
@@ -63,10 +64,11 @@ export default function LoginPage() {
             type="password"
             autoComplete="current-password"
             aria-invalid={!!errors.password}
+            aria-describedby={errors.password ? "password-error" : undefined}
             {...register("password")}
           />
           {errors.password && (
-            <span className={styles.error} role="alert">
+            <span id="password-error" className={styles.error} role="alert">
               {errors.password.message}
             </span>
           )}

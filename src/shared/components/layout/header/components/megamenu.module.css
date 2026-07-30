@@ -61,3 +61,15 @@
 .otherCategories a:hover {
   color: var(--bg-cta);
 }
+
+.dropdownContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .dropdownContent {
+    flex-direction: row;
+  }
+}

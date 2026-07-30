@@ -6,6 +6,7 @@ import styles from "./loginpromptmodal.module.css";
 export default function LoginPromptModal({
   isOpen,
   onClose,
+  redirectTo,
 }: LoginPromptModalProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Accedi per continuare">
@@ -14,7 +15,12 @@ export default function LoginPromptModal({
         <button type="button" className={styles.cancelButton} onClick={onClose}>
           Annulla
         </button>
-        <Link to="/auth/login" className="btn-primary" onClick={onClose}>
+        <Link
+          to="/auth/login"
+          state={redirectTo ? { from: redirectTo } : undefined}
+          className="btn-primary"
+          onClick={onClose}
+        >
           Vai al login
         </Link>
       </div>

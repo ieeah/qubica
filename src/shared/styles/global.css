@@ -36,6 +36,8 @@
     --border-color: hsl(234 74% 17% / 0.1);
     --bg-card: hsl(0 0% 100%);
     --bg-surface: hsl(0 0% 100%);
+    
+    --box-translucent-bg: rgba(255, 255, 255, 0.55);
   }
 
   /* Tema Scuro (Dark) */
@@ -49,6 +51,8 @@
     --border-color: hsl(38 100% 98% / 0.1);
     --bg-card: hsl(0 0% 100% / 0.05);
     --bg-surface: hsl(234 74% 22%);
+    
+    --box-translucent-bg: rgba(255, 255, 255, 0.75);
   }
 
   body {
