@@ -1,32 +1,44 @@
-# React + TypeScript + Vite
+# Q-store E-Commerce Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Progetto sviluppato per la tech challenge di Qubica. È un piccolo e-commerce costruito interamente in React e TypeScript, usando Vite come bundler.
 
-Currently, two official plugins are available:
+Ho cercato di mantenere il focus sull'esperienza utente e sull'accessibilità, evitando di usare framework CSS pesanti o UI library.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Cosa c'è dentro
 
-## React Compiler
+- **Catalogo & FakeStoreAPI:** I prodotti vengono fetchati dall'API pubblica, con skeleton loader durante i caricamenti per ridurre i content layout shift.
+- **Carrello e Checkout:** Il carrello usa il context ed il localStorage (quando disponibile) per mantenere lo stato in locale, mentre il processo di checkout simula una chiamata di rete.
+- **Autenticazione:** C'è un sistema di mock login. Certe aree (come il checkout o il profilo) sono protette tramite un componente wrapper sul router.
+- **Styling:** Per lo stile ho usato i CSS modules e variabili globali (`global.css`) per gestire dinamicamente il tema chiaro/scuro. 
+- **UX & Animazioni:** Ho inserito alcune View Transitions, ad esempio per il passaggio "fluido" della modale di fine checkout dallo stato di "loading" allo stato di successo.
+- **Accessibilità:** Ho cercato di usare il più possibile elementi e tag semantici HTML che garantiscano l'accessibilità di default (dialog, output), non dovendo ricostruirla da zero.
+- **Test:** Viene utilizzato Vitest per gli unit test (circa 30) che coprono Context, custom hooks e utility principali.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Come avviarlo
 
-## Expanding the Oxlint configuration
+Il setup è standard. Avendo Node.js installato.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+git clone <repository_url>
+cd ./qubica
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Il dev server dovrebbe partire su `http://localhost:5173`.
+
+Per far girare i test, lanciare il comando:
+```bash
+npm test
+```
+
+## Note sull'uso dell'AI
+
+Durante lo sviluppo del progetto, mi sono fatto assistere da agenti AI, comandati tramite un mio set di [custom skills](https://gitlab.com/g_ieeah/ai-skills/ai-skills) pensate per aiutarmi nella velocizzazione della gestione del lifecycle del progetto e dei singoli task. Le aree in cui ho sfruttato di più questo strumento, sono:
+
+- Boilerplate iniziale dei componenti.
+- Risolvere in modo efficace errori del compilatore TypeScript.
+- Scrivere parte del CSS strutturale di base.
+- Sveltire la stesura dei file di unit test una volta definita la logica.
+
+L'utilizzo dell'AI mi ha permesso di ridurre i tempi meccanici, "a basso valore", per concentrarmi sulle scelte architetturali e di "disegno", ma soprattutto di concentrarmi sulla cura dei dettagli di accessibilità.
