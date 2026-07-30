@@ -15,7 +15,7 @@ describe('useFakeStore', () => {
     vi.clearAllMocks();
     
     // Creiamo un mock fittizio della fetch globale
-    global.fetch = vi.fn(() =>
+    globalThis.fetch = vi.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ success: true }),
@@ -31,7 +31,7 @@ describe('useFakeStore', () => {
       await result.current.store.products.getAll();
     });
 
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       `${API_BASE_URL}${API_ENDPOINTS.PRODUCTS}`,
       expect.objectContaining({ method: 'GET' })
     );
@@ -45,7 +45,7 @@ describe('useFakeStore', () => {
       await result.current.store.cart.get();
     });
 
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       `${API_BASE_URL}${API_ENDPOINTS.CART}`,
       expect.objectContaining({
         method: 'GET',
@@ -67,7 +67,7 @@ describe('useFakeStore', () => {
       await result.current.store.auth.login(credentials);
     });
 
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       `${API_BASE_URL}${API_ENDPOINTS.LOGIN}`,
       expect.objectContaining({
         method: 'POST',

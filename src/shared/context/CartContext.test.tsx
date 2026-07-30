@@ -2,8 +2,8 @@ import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import CartContextProvider, { useCartContext } from './CartContext';
 import storage from '@/shared/utils/storage';
-import { ReactNode } from 'react';
-import type { Product } from '../types/fakestore';
+import { type ReactNode } from 'react';
+import type { Product } from '@/shared/types/fakestore';
 
 vi.mock('@/shared/utils/storage', () => ({
   default: {

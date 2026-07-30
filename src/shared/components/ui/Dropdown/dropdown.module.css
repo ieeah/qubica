@@ -1,0 +1,39 @@
+.menuPanel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 600px;
+  max-width: calc(100vw - 2rem);
+  background-color: var(--bg-card);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+  z-index: 100;
+
+  animation: slideIn 0.2s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 767px) {
+  .menuPanel {
+    position: fixed;
+    top: 65px;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+}

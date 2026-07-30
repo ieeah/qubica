@@ -1,7 +1,9 @@
 @layer reset, base, components, utilities;
 
 @layer reset {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -10,22 +12,84 @@
 
 @layer base {
   :root {
-    --font-sans: 'Inter', system-ui, sans-serif;
-    --bg-canvas: #f4f4f4;
-    --text-main: #111111;
-    --border-thick: 3px solid var(--text-main);
-    --brutal-shadow: 4px 4px 0 var(--text-main);
-    --brutal-shadow-hover: 2px 2px 0 var(--text-main);
+    --font-sans: "Inter", system-ui, sans-serif;
+    
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
-    --color-brand: #ffdf00; /* Giallo brutalista */
-    --color-error: #ff3333;
+    --spacing-xl: 2rem;
+    --container-max-width: 1200px;
+    
+    --color-dark-blue: hsl(234 74% 17%);
+    --color-orange: hsl(36 84% 60%);
+    --color-cream: hsl(38 100% 98%);
+    --color-black: hsl(0 0% 0%);
+    --color-white: hsl(0 0% 100%);
+
+    /* Tema Chiaro (Light) - Default */
+    --bg-canvas: var(--color-cream);
+    --text-main: var(--color-black);
+    --text-title: var(--color-dark-blue);
+    --bg-cta: var(--color-orange);
+    --text-cta: var(--color-black);
+    
+    --border-color: hsl(234 74% 17% / 0.1);
+    --bg-card: hsl(0 0% 100%);
+    --bg-surface: hsl(0 0% 100%);
+  }
+
+  /* Tema Scuro (Dark) */
+  :root.dark {
+    --bg-canvas: var(--color-dark-blue);
+    --text-main: var(--color-white);
+    --text-title: var(--color-cream);
+    --bg-cta: var(--color-orange);
+    --text-cta: var(--color-black);
+
+    --border-color: hsl(38 100% 98% / 0.1);
+    --bg-card: hsl(0 0% 100% / 0.05);
+    --bg-surface: hsl(234 74% 22%);
   }
 
   body {
     font-family: var(--font-sans);
     background-color: var(--bg-canvas);
     color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-title);
+  }
+}
+
+@layer utilities {
+  .container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background-color: var(--bg-cta);
+    color: var(--text-cta);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-weight: 600;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+  }
+  
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+  
+  .btn-primary:active {
+    transform: scale(0.98);
   }
 }

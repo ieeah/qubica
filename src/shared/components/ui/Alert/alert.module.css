@@ -1,0 +1,9 @@
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error {
+  color: #c0392b;
+}
