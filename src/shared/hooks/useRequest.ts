@@ -1,45 +1,51 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 
 /**
- * Hook per gestire il ciclo di vita di una funzione che restituisce una Promise (es. chiamate API).
- * 
- * @param requestFn La funzione (factory) che esegue la richiesta.
- * @param deps Array di dipendenze opzionale. Se fornito, la richiesta viene eseguita automaticamente come "Query" al mount o al cambio delle dipendenze. Se omesso, funge da "Mutation" e va eseguita manualmente tramite la funzione `execute`.
+ * Manages async request state (isLoading, data, error) for manual execution.
+ *
+ * @param requestFn Request function. Receives a `RequestInit` with `signal` to support cancellation.
  */
 export default function useRequest<T, Args extends any[] = any[]>(
-  requestFn: (...args: Args) => Promise<[Error | null, T | null]>,
-  deps?: React.DependencyList
+  requestFn: (...args: Args) => Promise<[Error | null, T | null]>
 ) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  // Manteniamo la reference più aggiornata alla requestFn per non dover 
-  // ricreare execute o rilanciare useEffect se la funzione non è memoizzata.
   const requestFnRef = useRef(requestFn);
   useEffect(() => {
     requestFnRef.current = requestFn;
   });
 
+  // Abort previous or unmounted requests to avoid stale state updates
+  const abortControllerRef = useRef<AbortController | null>(null);
+
   const execute = useCallback(async (...args: Args) => {
+    abortControllerRef.current?.abort();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     setIsLoading(true);
-    const [err, res] = await requestFnRef.current(...args);
+    const call = requestFnRef.current as (
+      ...a: unknown[]
+    ) => Promise<[Error | null, T | null]>;
+    const [err, res] = await call(...args, { signal: controller.signal });
+
+    if (controller.signal.aborted) {
+      return [err, res] as const;
+    }
+
     setError(err);
     setData(res);
     setIsLoading(false);
     return [err, res] as const;
   }, []);
 
-  const isQuery = Array.isArray(deps);
-
   useEffect(() => {
-    if (isQuery) {
-      (async () => {
-        await execute(...([] as unknown as Args));
-      })();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, isQuery ? deps : []);
+    return () => {
+      abortControllerRef.current?.abort();
+    };
+  }, []);
 
   return [error, data, isLoading, execute] as const;
-}
+}
