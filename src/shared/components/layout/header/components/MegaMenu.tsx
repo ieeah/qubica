@@ -8,10 +8,12 @@ import {
 import { Link } from "react-router-dom";
 
 import Dropdown from "../../../ui/Dropdown/Dropdown";
+import Alert from "../../../ui/Alert/Alert";
 import SkeletonMegaMenu from "./SkeletonMegaMenu";
 
 import useCategories from "@/shared/hooks/useCategories";
 import cn from "@/shared/utils/cn";
+import { capitalize } from "@/shared/utils/capitalize";
 
 import styles from "./megamenu.module.css";
 
@@ -33,7 +35,11 @@ export default function MegaMenu() {
   if (isLoading) {
     dropdownContent = <SkeletonMegaMenu />;
   } else if (error) {
-    dropdownContent = <FetchError />;
+    dropdownContent = (
+      <div className="col-12">
+        <Alert type="error" message="Errore durante il caricamento delle categorie." />
+      </div>
+    );
   } else {
     dropdownContent = (
       <MegaMenuContent categories={categories || []} setIsOpen={setIsOpen} />
@@ -62,16 +68,6 @@ export default function MegaMenu() {
       >
         <div className="row g-3">{dropdownContent}</div>
       </Dropdown>
-    </div>
-  );
-}
-
-function FetchError() {
-  return (
-    <div className="col-12">
-      <p className="text-danger">
-        Errore durante il caricamento delle categorie.
-      </p>
     </div>
   );
 }
@@ -110,7 +106,7 @@ function MegaMenuContent({
                 to={`/?category=${encodeURIComponent(cat)}`}
                 onClick={() => setIsOpen(false)}
               >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {capitalize(cat)}
               </Link>
             </li>
           ))}
