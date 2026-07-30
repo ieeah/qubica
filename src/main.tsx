@@ -7,13 +7,16 @@ import "@/shared/styles/global.css";
 
 import App from "@/App";
 import AuthContextProvider from "@/shared/context/AuthContext";
+import ThemeContextProvider from "@/shared/context/ThemeContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthContextProvider>
+    <ThemeContextProvider>
+      <AuthContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AuthContextProvider>
+    </ThemeContextProvider>
   </StrictMode>,
 );
