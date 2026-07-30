@@ -9,16 +9,19 @@ import App from "@/App";
 import AuthContextProvider from "@/shared/context/AuthContext";
 import ThemeContextProvider from "@/shared/context/ThemeContext";
 import WishlistContextProvider from "@/shared/context/WishlistContext";
+import CartContextProvider from "@/shared/context/CartContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeContextProvider>
       <AuthContextProvider>
-        <WishlistContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </WishlistContextProvider>
+        <CartContextProvider>
+          <WishlistContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </WishlistContextProvider>
+        </CartContextProvider>
       </AuthContextProvider>
     </ThemeContextProvider>
   </StrictMode>,

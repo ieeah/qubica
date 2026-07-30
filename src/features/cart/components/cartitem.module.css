@@ -1,0 +1,146 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.imageLink {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.details {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title a:hover {
+  text-decoration: underline;
+}
+
+.price {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--background-alt);
+  border-radius: 20px;
+  padding: 0.25rem;
+}
+
+.qtyBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.qtyBtn:hover:not(:disabled) {
+  background-color: var(--background);
+}
+
+.qtyBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qtyDisplay {
+  min-width: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.totalAndRemove {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.itemTotal {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: var(--error);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.removeBtn:hover {
+  background-color: rgba(239, 68, 68, 0.1); /* Assuming error color is red-ish */
+}
+
+@media (max-width: 576px) {
+  .item {
+    flex-wrap: wrap;
+  }
+  
+  .details {
+    min-width: 100%;
+    order: -1;
+  }
+  
+  .actions {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
