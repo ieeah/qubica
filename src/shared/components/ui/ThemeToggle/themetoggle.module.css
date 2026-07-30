@@ -1,0 +1,21 @@
+.toggleBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.toggleBtn:hover {
+  background-color: var(--border-color);
+}
+
+.toggleBtn:focus-visible {
+  outline: 2px solid var(--bg-cta);
+  outline-offset: 2px;
+}
