@@ -69,7 +69,7 @@ export default function MegaMenu() {
         onClose={() => setIsOpen(false)}
         triggerRef={triggerRef}
       >
-        <div className="d-flex g-3">{dropdownContent}</div>
+        <div className={styles.dropdownContent}>{dropdownContent}</div>
       </Dropdown>
     </div>
   );

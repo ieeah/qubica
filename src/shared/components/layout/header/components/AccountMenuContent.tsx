@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "lucide-react";
 import { useAuthContext } from "@/shared/context/AuthContext";
-import { useCartContext } from "@/shared/context/CartContext";
 import { useWishlistContext } from "@/shared/context/WishlistContext";
 import CountBadge from "@/shared/components/ui/CountBadge/CountBadge";
 import cn from "@/shared/utils/cn";
@@ -13,7 +11,6 @@ export default function AccountMenuContent({
   variant = "dropdown",
 }: AccountMenuContentProps) {
   const { token, logout } = useAuthContext();
-  const { state } = useCartContext();
   const { items: wishlistItems } = useWishlistContext();
 
   if (!token) {
@@ -27,18 +24,7 @@ export default function AccountMenuContent({
   return (
     <div className={cn(styles.content, styles[variant])}>
       <ul className={styles.menuList}>
-        <li>
-          <Link
-            to="/cart"
-            onClick={onNavigate}
-            className={styles.cartLink}
-            aria-label={`Carrello${state.totalItems > 0 ? `, ${state.totalItems} articoli` : ""}`}
-          >
-            <ShoppingCart size={20} aria-hidden="true" />
-            <span>Carrello</span>
-            <CountBadge count={state.totalItems} />
-          </Link>
-        </li>
+
         <li>
           <Link
             to="/wishlist"

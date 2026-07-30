@@ -126,3 +126,11 @@
   color: var(--text-muted);
   font-size: 0.9rem;
 }
+
+.themeToggleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
