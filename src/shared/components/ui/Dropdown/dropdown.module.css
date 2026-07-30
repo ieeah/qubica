@@ -4,7 +4,7 @@
   right: 0;
   width: 600px;
   max-width: calc(100vw - 2rem);
-  background-color: var(--bg-card);
+  background-color: var(--bg-surface);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-color);
   border-radius: 8px;
