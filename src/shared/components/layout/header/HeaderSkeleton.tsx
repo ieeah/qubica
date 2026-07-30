@@ -1,5 +1,5 @@
-import { Skeleton } from "../../skeleton/Skeleton";
-import styles from "../header.module.css";
+import { Skeleton } from "@/shared/components/skeleton/Skeleton";
+import styles from "@/shared/components/layout/header/header.module.css";
 
 export default function HeaderSkeleton() {
   return (

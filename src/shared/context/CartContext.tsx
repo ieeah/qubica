@@ -9,7 +9,7 @@ import {
   type CartContextType,
   type LocalCartItem,
 } from "@/shared/types/CartContext.type";
-import type { Product } from "../types/fakestore";
+import type { Product } from "@/shared/types/fakestore";
 import storage from "@/shared/utils/storage";
 import createAppContext from "@/shared/utils/createAppContext";
 

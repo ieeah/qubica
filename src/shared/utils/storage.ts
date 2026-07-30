@@ -23,6 +23,7 @@ const storage: AppStorage = {
     try {
       return JSON.parse(rawResult) as T;
     } catch {
+      dummyLogger.error(`Failed to parse stored value for key "${key}", returning raw value`);
       return rawResult as unknown as T;
     }
   },
@@ -55,8 +56,9 @@ const storage: AppStorage = {
       const stringified = JSON.stringify(data);
       activeStorage.setItem(key, stringified);
     } catch (error) {
-      dummyLogger.error("Failed to persist data to storage");
-      dummyLogger.error(JSON.stringify(error));
+      dummyLogger.error(
+        `Failed to persist data to storage (maybe quota exceeded): ${JSON.stringify(error)}`,
+      );
     }
   },
 

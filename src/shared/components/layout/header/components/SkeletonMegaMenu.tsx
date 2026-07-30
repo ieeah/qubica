@@ -1,4 +1,4 @@
-import { Skeleton } from "../../../skeleton/Skeleton";
+import { Skeleton } from "@/shared/components/skeleton/Skeleton";
 import styles from "./megamenu.module.css";
 import cn from "@/shared/utils/cn";
 

@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect, type ReactNode } from "react";
 
-import type { ThemeContextType, Theme } from "../types/ThemeContext.type";
-import createAppContext from "../utils/createAppContext";
-import storage from "../utils/storage";
+import type { ThemeContextType, Theme } from "@/shared/types/ThemeContext.type";
+import createAppContext from "@/shared/utils/createAppContext";
+import storage from "@/shared/utils/storage";
 
 const THEME_STORAGE_PREFERRED_KEY = "QST-FAV_THEME";
 const THEME_STORAGE_CURRENT_KEY = "QST-CUR_THEME";

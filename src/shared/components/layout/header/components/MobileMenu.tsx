@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, X } from "lucide-react";
 import styles from "./mobilemenu.module.css";
 import useCategories from "@/shared/hooks/useCategories";
-import Alert from "../../../ui/Alert/Alert";
+import Alert from "@/shared/components/ui/Alert/Alert";
 import { capitalize } from "@/shared/utils/capitalize";
 
 type Props = {

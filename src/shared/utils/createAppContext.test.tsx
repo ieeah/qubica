@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import createAppContext from './createAppContext';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 describe('createAppContext', () => {
   it('restituisce correttamente il valore se usato all\'interno del Provider', () => {

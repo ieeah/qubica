@@ -7,8 +7,8 @@ import {
 } from "react";
 import { Link } from "react-router-dom";
 
-import Dropdown from "../../../ui/Dropdown/Dropdown";
-import Alert from "../../../ui/Alert/Alert";
+import Dropdown from "@/shared/components/ui/Dropdown/Dropdown";
+import Alert from "@/shared/components/ui/Alert/Alert";
 import SkeletonMegaMenu from "./SkeletonMegaMenu";
 
 import useCategories from "@/shared/hooks/useCategories";

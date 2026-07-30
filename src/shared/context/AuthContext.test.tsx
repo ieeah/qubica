@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import AuthContextProvider, { useAuthContext } from './AuthContext';
 import storage from '@/shared/utils/storage';
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 vi.mock('@/shared/utils/storage', () => ({
   default: {
